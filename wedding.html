@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scott & Kelly — September 6, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #fdfaf6;
+    --sand: #e8ddd0;
+    --taupe: #c9b9a8;
+    --brown: #8b6f5e;
+    --dark: #3a2e28;
+    --text: #5a4a40;
+    --accent: #b5956a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: transparent;
+    transition: background 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(247,243,238,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.4s;
+  }
+  nav.scrolled .nav-logo { color: var(--dark); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(255,255,255,0.9);
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--text); }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(40,30,25,0.18) 0%,
+      rgba(40,30,25,0.35) 60%,
+      rgba(40,30,25,0.55) 100%
+    ),
+    url("pictures/cute.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.04);
+    transition: transform 8s ease-out;
+  }
+  #hero.loaded .hero-bg { transform: scale(1); }
+
+  /* Photo placeholder pattern */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3C/svg%3E");
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 0 24px;
+  }
+  .hero-names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.25);
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-and {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: none;
+    margin: 8px 0;
+    opacity: 0.92;
+    animation: fadeUp 1.2s ease 0.15s both;
+  }
+  .hero-date {
+    margin-top: 28px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    animation: fadeUp 1.2s ease 0.3s both;
+  }
+  .hero-divider {
+    display: inline-block;
+    width: 80px;
+    height: 1px;
+    background: rgba(255,255,255,0.55);
+    vertical-align: middle;
+    margin: 0 14px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 96px 24px;
+  }
+  .section-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 24px auto;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 60px;
+    background: var(--taupe);
+  }
+  .divider-icon {
+    color: var(--taupe);
+    font-size: 1rem;
+  }
+
+  /* ── RSVP ── */
+  #rsvp { background: var(--cream); }
+  .rsvp-body {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin: 6px 0 28px;
+    line-height: 1.8;
+  }
+  .rsvp-deadline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--brown);
+    margin-bottom: 32px;
+    display: block;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--dark);
+    color: white;
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--brown);
+    transform: translateY(-1px);
+  }
+
+  /* ── DETAILS ── */
+  #details { background: var(--warm-white); }
+  .venue-photo {
+    width: 100%;
+    max-width: 680px;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 20px;
+    position: relative;
+    background-image:
+      linear-gradient(160deg, rgba(224,212,200,0.45) 0%, rgba(185,169,144,0.25) 100%),
+      url("pictures/greys.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .venue-photo-placeholder {
+    width: 100%;
+    max-width: 680px;
+    height: 380px;
+    margin: 0 auto 20px;
+    background: linear-gradient(160deg, #e0d4c8 0%, #c9b9a8 40%, #b0997f 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .venue-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 60%, rgba(255,255,255,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(200,180,155,0.3) 0%, transparent 50%);
+  }
+  .venue-icon {
+    font-size: 3rem;
+    opacity: 0.4;
+    margin-bottom: 10px;
+  }
+  .venue-label-sm {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(60,45,35,0.6);
+    letter-spacing: 0.05em;
+  }
+  .venue-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-top: 4px;
+    text-align: left;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  .venue-address-block {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .venue-address-block svg {
+    width: 36px;
+    height: 36px;
+    opacity: 0.35;
+  }
+  .venue-address {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .venue-map-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+  .venue-map-link:hover { color: var(--brown); border-color: var(--brown); }
+
+  /* ── ITINERARY ── */
+  #itinerary { background: var(--cream); }
+  .itinerary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 40px 0 32px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .itin-card {
+    background: white;
+    border: 1px solid var(--sand);
+    padding: 36px 24px 28px;
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .itin-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(90,74,64,0.1);
+  }
+  .itin-card-icon {
+    font-size: 2.6rem;
+    margin-bottom: 16px;
+    display: block;
+    line-height: 1;
+  }
+  .itin-event {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .itin-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--dark);
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .itin-detail {
+    font-size: 0.78rem;
+    line-height: 1.75;
+    color: var(--text);
+    opacity: 0.85;
+  }
+  .itin-detail em {
+    font-style: normal;
+    font-size: 0.7rem;
+    display: block;
+    margin-top: 6px;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+  }
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 13px 36px;
+    transition: all 0.25s;
+    margin-top: 8px;
+  }
+  .btn-outline:hover {
+    background: var(--dark);
+    color: white;
+  }
+
+  /* ── GALLERY ── */
+  #gallery {
+    background: var(--warm-white);
+    padding: 0;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 320px 320px;
+  }
+  .gallery-cell {
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-cell-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+  }
+  .gallery-cell:hover .gallery-cell-inner {
+    transform: scale(1.04);
+  }
+  .gallery-ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-ph-1 { background: linear-gradient(135deg, #c9b9a8 0%, #8b6f5e 100%); }
+  .gallery-ph-2 { background: linear-gradient(160deg, #b5a090 0%, #6b4f40 100%); }
+  .gallery-ph-3 { background: linear-gradient(135deg, #d4c0aa 0%, #9a7a65 100%); }
+  .gallery-ph-4 { background: linear-gradient(160deg, #e0cfc0 0%, #7a5a48 100%); }
+  .gallery-ph-icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    color: white;
+  }
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── REGISTRY ── */
+  #registry { background: var(--cream); }
+  .registry-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    max-width: 620px;
+    margin: 0 auto 40px;
+    color: var(--text);
+  }
+  .registry-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-reg {
+    display: inline-block;
+    border: 1px solid var(--taupe);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    background: white;
+    transition: all 0.25s;
+  }
+  .btn-reg:hover {
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+  .btn-reg.featured {
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+  .btn-reg.featured:hover {
+    background: var(--brown);
+    border-color: var(--brown);
+  }
+
+  /* ── FAQ ── */
+  #faq { background: var(--warm-white); }
+  #faq .section-inner { max-width: 760px; text-align: left; }
+  #faq .section-title { text-align: left; }
+  .faq-list {
+    margin-top: 40px;
+    border-top: 1px solid var(--sand);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--sand);
+  }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+    cursor: pointer;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--dark);
+    user-select: none;
+    gap: 16px;
+  }
+  .faq-q:hover { color: var(--brown); }
+  .faq-chevron {
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    color: var(--taupe);
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease, padding 0.3s;
+    font-size: 0.82rem;
+    line-height: 1.85;
+    color: var(--text);
+    opacity: 0.9;
+    padding-bottom: 0;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-bottom: 22px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--sand);
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .footer-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .footer-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .itinerary-cards { grid-template-columns: 1fr; max-width: 360px; }
+    .gallery-grid { grid-template-rows: 220px 220px; }
+    .registry-btns { flex-direction: column; align-items: center; }
+    .hero-names { font-size: clamp(4rem, 18vw, 7rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <span class="nav-logo">S & K</span>
+  <ul class="nav-links">
+    <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#itinerary">Itinerary</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#registry">Registry</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-names">
+      Scott
+      <span class="hero-and">and</span>
+      Kelly
+    </h1>
+    <p class="hero-date">
+      <span class="hero-divider"></span>
+      September 6, 2026
+      <span class="hero-divider"></span>
+    </p>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="section-inner">
+    <span class="section-label">We'd love to have you</span>
+    <h2 class="section-title">RSVP</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <p class="rsvp-body">We can't wait to celebrate with you.<br>Please let us know if you'll be joining us.</p>
+    <span class="rsvp-deadline">Kindly reply by July 1st, 2026</span>
+    <br>
+    <a href="#" class="btn-primary">RSVP</a>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section id="details">
+  <div class="section-inner">
+    <h2 class="section-title">The Details</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <!-- Venue photo -->
+    <div class="venue-photo" role="img" aria-label="Grey Gables Estate"></div>
+    <span class="venue-name">Grey Gables Estate</span>
+
+    <div class="venue-address-block">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4C14.48 4 10 8.48 10 14C10 21.5 20 36 20 36C20 36 30 21.5 30 14C30 8.48 25.52 4 20 4ZM20 18C17.79 18 16 16.21 16 14C16 11.79 17.79 10 20 10C22.21 10 24 11.79 24 14C24 16.21 22.21 18 20 18Z" fill="#8b6f5e" opacity="0.4"/>
+      </svg>
+      <div class="venue-address">
+        Grey Gables Estate<br>
+        <a href="https://maps.google.com/?q=Grey+Gables+Estate+Portland+Oregon" target="_blank" class="venue-map-link">
+          Portland, Oregon — View on Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="section-inner" style="max-width:960px">
+    <h2 class="section-title">The Itinerary</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="itinerary-cards">
+
+      <div class="itin-card">
+        <span class="itin-card-icon">💍</span>
+        <span class="itin-event">Ceremony</span>
+        <div class="itin-time">5:00 PM</div>
+        <p class="itin-detail">
+          Grey Gables Estate<br>
+          Outdoor ceremony
+          <em>Portland, Oregon</em>
+        </p>
+      </div>
+
+      <div class="itin-card">
+        <span class="itin-card-icon">🥂</span>
+        <span class="itin-event">Cocktail Hour</span>
+        <div class="itin-time">5:30 PM</div>
+        <p class="itin-detail">
+          Drinks &amp; Hors d'oeuvres<br>
+          <em>Cocktails &amp; light bites<br>will be served</em>
+        </p>
+      </div>
+
+      <div class="itin-card">
+        <span class="itin-card-icon">🎶</span>
+        <span class="itin-event">Reception</span>
+        <div class="itin-time">6:30 PM</div>
+        <p class="itin-detail">
+          Dinner, Drinks,<br>Dancing &amp; Dessert
+          <em>Menu details to follow</em>
+        </p>
+      </div>
+
+    </div>
+
+    <a href="#" class="btn-outline">Full Itinerary</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-cell">
+      <div class="gallery-cell-inner">
+        <img src="pictures/gallery1.jpg" alt="Gallery photo 1" class="gallery-img">
+      </div>
+    </div>
+    <div class="gallery-cell">
+      <div class="gallery-cell-inner">
+        <img src="pictures/gallery2.jpg" alt="Gallery photo 2" class="gallery-img">
+      </div>
+    </div>
+    <div class="gallery-cell">
+      <div class="gallery-cell-inner">
+        <img src="pictures/gallery3.jpg" alt="Gallery photo 3" class="gallery-img">
+      </div>
+    </div>
+    <div class="gallery-cell">
+      <div class="gallery-cell-inner">
+        <img src="pictures/gallery4.jpg" alt="Gallery photo 4" class="gallery-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRY -->
+<section id="registry">
+  <div class="section-inner">
+    <span class="section-label">With Gratitude</span>
+    <h2 class="section-title">Registry</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <p class="registry-text">
+      Many of you are traveling to celebrate with us — your presence means the world to us and is all we ask for. If you're celebrating from afar or would just like to contribute to our registry or honeymoon fund, select an option below.
+    </p>
+    <div class="registry-btns">
+      <a href="#" class="btn-reg featured">Honeymoon Fund</a>
+      <a href="#" class="btn-reg">Registry</a>
+      <a href="#" class="btn-reg">Gift a Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <span class="section-label">Questions</span>
+    <h2 class="section-title">FAQ</h2>
+    <div class="divider" style="justify-content:flex-start;margin-left:0"><span class="divider-icon">✦</span></div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What is the RSVP deadline?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Please RSVP by July 1st, 2026. We kindly ask that you let us know as soon as possible so we can finalize our headcount with the venue and caterers.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What time should I arrive?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">The ceremony begins at 5:00 PM sharp. We recommend arriving 15–20 minutes early to find your seat and settle in. Doors will open at 4:30 PM.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Where should I park?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">Complimentary parking is available on-site at Grey Gables Estate. Attendants will guide you to the designated parking area upon arrival. We also recommend rideshare options if you plan to enjoy cocktails.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Where should I stay?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">We have reserved a room block at a nearby hotel. More details, including a booking code, will be shared with guests who RSVP. There are also several wonderful boutique hotels and vacation rentals in the area.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Will there be transportation?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">We will be providing a shuttle between the hotel room block and the venue. Shuttle schedule details will be shared closer to the wedding date. Rideshare services are also readily available in the area.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What should I wear?</span>
+          <span class="faq-chevron">▾</span>
+        </div>
+        <div class="faq-a">The dress code is cocktail attire. Think garden party elegance — flowy dresses, linen suits, and pastel tones are always welcome. Please keep in mind the ceremony is outdoors, so comfortable footwear is a must. We love a heel but a wedge or flat is always a great idea on grass!</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-names">Scott &amp; Kelly</div>
+  <p class="footer-date">September 6, 2026</p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero parallax & load
+  const hero = document.getElementById('hero');
+  hero.classList.add('loaded');
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Toggle clicked
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.itin-card, .section-inner').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
