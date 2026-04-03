@@ -358,10 +358,14 @@
     box-shadow: 0 12px 36px rgba(90,74,64,0.1);
   }
   .itin-card-icon {
-    font-size: 2.6rem;
-    margin-bottom: 16px;
+    width: 75px;
+    height: 75px;
+    max-width: 90px;
+    max-height: 90px;
+    margin: 0 auto 12px;
     display: block;
     line-height: 1;
+    object-fit: contain;
   }
   .itin-event {
     font-family: 'Jost', sans-serif;
@@ -453,6 +457,48 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  /* ── CAT RAIN ── */
+  #cat-rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 99999;
+  }
+  #cat-button {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 100000;
+    background: #8b6f5e;
+    color: white;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+  }
+  @keyframes catFall {
+    0% {
+      opacity: 0;
+      transform: translateY(-120px) rotate(0deg);
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(110vh) rotate(720deg);
+    }
   }
 
   /* ── REGISTRY ── */
@@ -549,7 +595,7 @@
   footer {
     background: var(--cream);
     border-top: 1px solid var(--sand);
-    padding: 60px 24px;
+    padding: 20px 24px;
     text-align: center;
   }
   .footer-names {
@@ -581,7 +627,7 @@
 
 <!-- NAV -->
 <nav id="mainNav">
-  <span class="nav-logo">S & K</span>
+  <span class="nav-logo"><img src="pictures/monogram.png" alt="Monogram" style="height: 42px; width: auto;" /></span>
   <ul class="nav-links">
     <li><a href="#rsvp">RSVP</a></li>
     <li><a href="#details">Details</a></li>
@@ -596,11 +642,7 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <h1 class="hero-names">
-      Scott
-      <span class="hero-and">and</span>
-      Kelly
-    </h1>
+    <img src="pictures/hero_title.png" alt="Scott and Kelly" style="max-width: 320px; width: min(80vw,320px); height: auto; margin-bottom: 1rem;" />
     <p class="hero-date">
       <span class="hero-divider"></span>
       September 6, 2026
@@ -625,21 +667,19 @@
 <!-- DETAILS -->
 <section id="details">
   <div class="section-inner">
-    <h2 class="section-title">The Details</h2>
+    <span class="section-label">Join us for our celebration</span>
+    <h2 class="section-title">Details</h2>
     <div class="divider"><span class="divider-icon">✦</span></div>
 
     <!-- Venue photo -->
     <div class="venue-photo" role="img" aria-label="Grey Gables Estate"></div>
-    <span class="venue-name">Grey Gables Estate</span>
 
     <div class="venue-address-block">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 4C14.48 4 10 8.48 10 14C10 21.5 20 36 20 36C20 36 30 21.5 30 14C30 8.48 25.52 4 20 4ZM20 18C17.79 18 16 16.21 16 14C16 11.79 17.79 10 20 10C22.21 10 24 11.79 24 14C24 16.21 22.21 18 20 18Z" fill="#8b6f5e" opacity="0.4"/>
-      </svg>
+      <img src="pictures/fountain.png" alt="Map pin" class="venue-icon-img" />
       <div class="venue-address">
         Grey Gables Estate<br>
-        <a href="https://maps.google.com/?q=Grey+Gables+Estate+Portland+Oregon" target="_blank" class="venue-map-link">
-          Portland, Oregon — View on Google Maps
+        <a href="https://maps.app.goo.gl/Yv33dYzigRFK8ueH9" target="_blank" class="venue-map-link">
+          3009 SE Chestnut St, Portland, Oregon
         </a>
       </div>
     </div>
@@ -649,13 +689,14 @@
 <!-- ITINERARY -->
 <section id="itinerary">
   <div class="section-inner" style="max-width:960px">
-    <h2 class="section-title">The Itinerary</h2>
+    <span class="section-label">Our schedule</span>
+    <h2 class="section-title">Itinerary</h2>
     <div class="divider"><span class="divider-icon">✦</span></div>
 
     <div class="itinerary-cards">
 
       <div class="itin-card">
-        <span class="itin-card-icon">💍</span>
+        <img src="pictures/ceremony.png" alt="Ceremony" class="itin-card-icon" />
         <span class="itin-event">Ceremony</span>
         <div class="itin-time">5:00 PM</div>
         <p class="itin-detail">
@@ -666,7 +707,7 @@
       </div>
 
       <div class="itin-card">
-        <span class="itin-card-icon">🥂</span>
+        <img src="pictures/coctail.png" alt="Cocktail Hour" class="itin-card-icon" />
         <span class="itin-event">Cocktail Hour</span>
         <div class="itin-time">5:30 PM</div>
         <p class="itin-detail">
@@ -676,7 +717,7 @@
       </div>
 
       <div class="itin-card">
-        <span class="itin-card-icon">🎶</span>
+        <img src="pictures/reception.png" alt="Reception" class="itin-card-icon" />
         <span class="itin-event">Reception</span>
         <div class="itin-time">6:30 PM</div>
         <p class="itin-detail">
@@ -693,27 +734,15 @@
 
 <!-- GALLERY -->
 <section id="gallery">
-  <div class="gallery-grid">
-    <div class="gallery-cell">
-      <div class="gallery-cell-inner">
-        <img src="pictures/gallery1.jpg" alt="Gallery photo 1" class="gallery-img">
-      </div>
+  <div class="gallery-carousel">
+    <button type="button" class="gallery-control gallery-prev" aria-label="Previous">‹</button>
+    <div class="gallery-track">
+      <div class="gallery-cell"><img src="pictures/gallery1.jpg" alt="Gallery photo 1" class="gallery-img"></div>
+      <div class="gallery-cell"><img src="pictures/gallery2.jpg" alt="Gallery photo 2" class="gallery-img"></div>
+      <div class="gallery-cell"><img src="pictures/gallery3.jpg" alt="Gallery photo 3" class="gallery-img"></div>
+      <div class="gallery-cell"><img src="pictures/gallery4.jpg" alt="Gallery photo 4" class="gallery-img"></div>
     </div>
-    <div class="gallery-cell">
-      <div class="gallery-cell-inner">
-        <img src="pictures/gallery2.jpg" alt="Gallery photo 2" class="gallery-img">
-      </div>
-    </div>
-    <div class="gallery-cell">
-      <div class="gallery-cell-inner">
-        <img src="pictures/gallery3.jpg" alt="Gallery photo 3" class="gallery-img">
-      </div>
-    </div>
-    <div class="gallery-cell">
-      <div class="gallery-cell-inner">
-        <img src="pictures/gallery4.jpg" alt="Gallery photo 4" class="gallery-img">
-      </div>
-    </div>
+    <button type="button" class="gallery-control gallery-next" aria-label="Next">›</button>
   </div>
 </section>
 
@@ -724,12 +753,10 @@
     <h2 class="section-title">Registry</h2>
     <div class="divider"><span class="divider-icon">✦</span></div>
     <p class="registry-text">
-      Many of you are traveling to celebrate with us — your presence means the world to us and is all we ask for. If you're celebrating from afar or would just like to contribute to our registry or honeymoon fund, select an option below.
+      Many of you are traveling to celebrate with us — your presence means the world to us and is all we ask for. If you'd like to help, we recommend contributing to our Registry or choosing a Gift Experience.
     </p>
     <div class="registry-btns">
-      <a href="#" class="btn-reg featured">Honeymoon Fund</a>
-      <a href="#" class="btn-reg">Registry</a>
-      <a href="#" class="btn-reg">Gift a Experience</a>
+      <a href="#" class="btn-reg featured">Registry</a>
     </div>
   </div>
 </section>
@@ -801,6 +828,9 @@
   <p class="footer-date">September 6, 2026</p>
 </footer>
 
+<div id="cat-rain-container"></div>
+<button id="cat-button" type="button">Enable Cats</button>
+
 <script>
   // Nav scroll effect
   const nav = document.getElementById('mainNav');
@@ -840,6 +870,59 @@
     el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
     observer.observe(el);
   });
+
+  // Gallery carousel control
+  const track = document.querySelector('.gallery-track');
+  const prevBtn = document.querySelector('.gallery-prev');
+  const nextBtn = document.querySelector('.gallery-next');
+
+  if (track && prevBtn && nextBtn) {
+    const scrollAmount = track.offsetWidth * 0.7;
+    prevBtn.addEventListener('click', () => track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => track.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+  }
+
+  // Cat rain
+  const catButton = document.getElementById('cat-button');
+  const catContainer = document.getElementById('cat-rain-container');
+  let catIntervalId = null;
+
+  const catSources = [
+    'pictures/cats/pet1.png',
+    'pictures/cats/pet2.png',
+    'pictures/cats/pet3.png'
+  ];
+
+  function createCat() {
+    const cat = document.createElement('img');
+    cat.src = catSources[Math.floor(Math.random() * catSources.length)];
+    cat.style.position = 'absolute';
+    const size = Math.floor(Math.random() * 60) + 40; // 40-100px
+    cat.style.width = `${size}px`;
+    cat.style.height = 'auto';
+    cat.style.left = `${Math.random() * 100}%`;
+    cat.style.top = '-140px';
+    const rotation = Math.random() * 360;
+    cat.style.transform = `rotate(${rotation}deg)`;
+    cat.style.opacity = '0';
+    cat.style.pointerEvents = 'none';
+    cat.style.animation = `catFall ${Math.random() * 3 + 5}s linear forwards`;
+
+    cat.addEventListener('animationend', () => {
+      cat.remove();
+    });
+
+    catContainer.appendChild(cat);
+  }
+
+  function startCatRain() {
+    if (catIntervalId) return;
+    catIntervalId = setInterval(createCat, 200);
+    catButton.textContent = 'Cats';
+    catButton.disabled = true;
+  }
+
+  catButton.addEventListener('click', startCatRain);
 </script>
 
 </body>
