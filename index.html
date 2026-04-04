@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
 <style>
   :root {
@@ -417,46 +418,38 @@
   /* ── GALLERY ── */
   #gallery {
     background: var(--warm-white);
-    padding: 0;
+    padding: 96px 24px;
   }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 320px 320px;
-  }
-  .gallery-cell {
-    overflow: hidden;
+  .gallery-carousel {
     position: relative;
+    max-width: 800px;
+    margin: 0 auto;
   }
-  .gallery-cell-inner {
+  .swiper {
     width: 100%;
-    height: 100%;
-    transition: transform 0.6s ease;
+    height: 320px;
   }
-  .gallery-cell:hover .gallery-cell-inner {
-    transform: scale(1.04);
-  }
-  .gallery-ph {
-    width: 100%;
-    height: 100%;
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
     display: flex;
-    align-items: center;
     justify-content: center;
-  }
-  .gallery-ph-1 { background: linear-gradient(135deg, #c9b9a8 0%, #8b6f5e 100%); }
-  .gallery-ph-2 { background: linear-gradient(160deg, #b5a090 0%, #6b4f40 100%); }
-  .gallery-ph-3 { background: linear-gradient(135deg, #d4c0aa 0%, #9a7a65 100%); }
-  .gallery-ph-4 { background: linear-gradient(160deg, #e0cfc0 0%, #7a5a48 100%); }
-  .gallery-ph-icon {
-    font-size: 2.5rem;
-    opacity: 0.3;
-    color: white;
+    align-items: center;
   }
   .gallery-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: rgba(0,0,0,0.5);
+  }
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    color: rgba(0,0,0,0.7);
   }
 
   /* ── CAT RAIN ── */
@@ -617,7 +610,6 @@
     nav { padding: 16px 20px; }
     .nav-links { gap: 16px; }
     .itinerary-cards { grid-template-columns: 1fr; max-width: 360px; }
-    .gallery-grid { grid-template-rows: 220px 220px; }
     .registry-btns { flex-direction: column; align-items: center; }
     .hero-names { font-size: clamp(4rem, 18vw, 7rem); }
   }
@@ -735,14 +727,16 @@
 <!-- GALLERY -->
 <section id="gallery">
   <div class="gallery-carousel">
-    <button type="button" class="gallery-control gallery-prev" aria-label="Previous">‹</button>
-    <div class="gallery-track">
-      <div class="gallery-cell"><img src="pictures/gallery1.jpg" alt="Gallery photo 1" class="gallery-img"></div>
-      <div class="gallery-cell"><img src="pictures/gallery2.jpg" alt="Gallery photo 2" class="gallery-img"></div>
-      <div class="gallery-cell"><img src="pictures/gallery3.jpg" alt="Gallery photo 3" class="gallery-img"></div>
-      <div class="gallery-cell"><img src="pictures/gallery4.jpg" alt="Gallery photo 4" class="gallery-img"></div>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="pictures/gallery1.jpg" alt="Gallery photo 1" class="gallery-img"></div>
+        <div class="swiper-slide"><img src="pictures/gallery2.jpg" alt="Gallery photo 2" class="gallery-img"></div>
+        <div class="swiper-slide"><img src="pictures/gallery3.jpg" alt="Gallery photo 3" class="gallery-img"></div>
+        <div class="swiper-slide"><img src="pictures/gallery4.jpg" alt="Gallery photo 4" class="gallery-img"></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
-    <button type="button" class="gallery-control gallery-next" aria-label="Next">›</button>
   </div>
 </section>
 
@@ -831,6 +825,8 @@
 <div id="cat-rain-container"></div>
 <button id="cat-button" type="button">Enable Cats</button>
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <script>
   // Nav scroll effect
   const nav = document.getElementById('mainNav');
@@ -872,15 +868,13 @@
   });
 
   // Gallery carousel control
-  const track = document.querySelector('.gallery-track');
-  const prevBtn = document.querySelector('.gallery-prev');
-  const nextBtn = document.querySelector('.gallery-next');
-
-  if (track && prevBtn && nextBtn) {
-    const scrollAmount = track.offsetWidth * 0.7;
-    prevBtn.addEventListener('click', () => track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
-    nextBtn.addEventListener('click', () => track.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
-  }
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
 
   // Cat rain
   const catButton = document.getElementById('cat-button');
