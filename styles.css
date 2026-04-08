@@ -618,10 +618,8 @@ section {
   z-index: 99999;
 }
 #cat-button {
-  position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
-  z-index: 100000;
+  display: block;
+  margin: 1.5rem auto 0;
   background: #8b6f5e;
   color: white;
   border: 0;
