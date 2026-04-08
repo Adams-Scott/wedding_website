@@ -35,16 +35,10 @@ body.itinerary-page {
   padding: 100px 40px 40px;
 }
 
-.page-grid {
-  display: grid;
-  grid-template-columns: minmax(120px, 160px) minmax(240px, 380px);
-  gap: 72px;
-  align-items: center;
+.itinerary-body {
   width: min(100%, 980px);
-  padding: 64px 56px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(200, 185, 168, 0.7);
-  box-shadow: 0 24px 70px rgba(90, 74, 64, 0.12);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .side-label {
@@ -396,13 +390,13 @@ section {
 .venue-photo {
   width: 100%;
   max-width: 680px;
-  height: 380px;
+  min-width: 300px;
+  aspect-ratio: 680 / 380;
   object-fit: cover;
   display: block;
   margin: 0 auto 20px;
-  position: relative;
   background-image:
-    linear-gradient(160deg, rgba(224,212,200,0.45) 0%, rgba(185,169,144,0.25) 100%),
+    /*linear-gradient(160deg, rgba(224,212,200,0.45) 0%, rgba(185,169,144,0.25) 100%),*/
     url("pictures/Details_Greys.jpg");
   background-size: cover;
   background-position: center;
@@ -806,25 +800,14 @@ footer {
   body.itinerary-page {
     padding: 24px;
   }
-  .page-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 40px 32px;
-  }
-  .side-label {
-    writing-mode: horizontal-tb;
-    transform: none;
-    font-size: 3rem;
-    text-align: center;
-  }
-  .side-line {
-    display: none;
+  .itinerary-body {
+    padding: 0 20px;
   }
 }
 
 @media (max-width: 520px) {
-  .page-grid {
-    padding: 28px 20px;
+  .itinerary-body {
+    padding: 0 16px;
   }
   .schedule-item {
     gap: 14px;

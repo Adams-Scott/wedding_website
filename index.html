@@ -29,7 +29,7 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <img src="pictures/hero_title.png" alt="Scott and Kelly" style="max-width: 500px; width: min(160vw,800px); height: auto; margin: 2rem auto 1rem; display: block;" />
+    <img src="pictures/hero_title.png" alt="Scott and Kelly" style="max-width: 500px; width: min(100vw,800px); height: auto; margin: 2rem auto 1rem; display: block;" />
     <img src="pictures/Hero_Date.png" alt="September 6, 2026" class="hero-date-img" />
   </div>
 </section>
@@ -127,6 +127,7 @@
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
@@ -265,6 +266,15 @@
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true, // lets users click dots to jump to slide
+    },
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    }
   });
 
   // Cat rain
