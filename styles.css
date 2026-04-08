@@ -32,7 +32,127 @@ body.itinerary-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 100px 40px 40px;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(120px, 160px) minmax(240px, 380px);
+  gap: 72px;
+  align-items: center;
+  width: min(100%, 980px);
+  padding: 64px 56px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(200, 185, 168, 0.7);
+  box-shadow: 0 24px 70px rgba(90, 74, 64, 0.12);
+}
+
+.side-label {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--dark);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+.side-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: var(--taupe);
+  opacity: 0.45;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.intro-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 4.4rem);
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.05;
+  max-width: 460px;
+}
+
+.schedule {
+  display: grid;
+  gap: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--sand);
+}
+
+.schedule-item {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  border-bottom: 1px solid rgba(200, 185, 168, 0.3);
+  padding-bottom: 18px;
+}
+
+.schedule-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-width: 116px;
+  color: var(--dark);
+}
+
+.schedule-event {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.92;
+}
+
+.schedule-event span {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  letter-spacing: 0.18em;
+  color: var(--brown);
+  font-size: 0.84rem;
+  opacity: 0.8;
+}
+
+body.itinerary-page nav {
+  background: rgba(247,243,238,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--sand);
+}
+body.itinerary-page .nav-logo {
+  color: var(--dark);
+}
+body.itinerary-page .nav-links a {
+  color: var(--text);
 }
 
 /* ── NAV ── */
