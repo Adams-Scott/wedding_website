@@ -588,8 +588,11 @@ section {
   max-width: 760px;
   text-align: left;
 }
+#faq .section-label {
+  text-align: center;
+}
 #faq .section-title {
-  text-align: left;
+  text-align: center;
 }
 .faq-list {
   margin-top: 40px;
