@@ -249,6 +249,13 @@ body.itinerary-page .nav-toggle span {
   color: var(--accent);
 }
 
+.mm-ocd,
+.mm-ocd__content,
+.mm-ocd__backdrop {
+  transition-duration: 0ms !important;
+  animation-duration: 0ms !important;
+}
+
 /* ── HERO ── */
 #hero {
   position: relative;

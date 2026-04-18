@@ -253,6 +253,16 @@
     menu.navigation({ title: 'Menu' });
     const drawer = menu.offcanvas({ position: 'right' });
 
+    const forceCloseMenu = () => {
+      drawer.close();
+      document.documentElement.classList.remove('mm-ocd-opened');
+      document.body.classList.remove('mm-ocd-opened');
+      document.querySelectorAll('.mm-ocd--open').forEach((panel) => {
+        panel.classList.remove('mm-ocd--open');
+      });
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
+
     navToggle.addEventListener('click', (event) => {
       event.preventDefault();
       drawer.open();
@@ -260,25 +270,22 @@
     });
 
     document.addEventListener('click', (event) => {
-      const link = event.target.closest('.mm-spn .mobile-link');
+      const link = event.target.closest('.mm-ocd a');
       if (!link) return;
 
       const href = link.getAttribute('href') || '';
-      drawer.close();
-      navToggle.setAttribute('aria-expanded', 'false');
+      forceCloseMenu();
 
       if (href.startsWith('#')) {
         event.preventDefault();
-        setTimeout(() => {
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            window.location.hash = href;
-          }
-        }, 260);
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'auto' });
+        } else {
+          window.location.hash = href;
+        }
       }
-    });
+    }, true);
   }
 
   // Hero parallax & load
