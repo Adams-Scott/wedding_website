@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://unpkg.com/mmenu-light@3.0.5/dist/mmenu-light.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +23,21 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#registry">Registry</a></li>
     <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button id="navToggle" class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+<nav id="mobileMenu" aria-label="Mobile navigation">
+  <ul class="mobile-nav-links">
+    <li><a href="#rsvp" class="mobile-link">RSVP</a></li>
+    <li><a href="#details" class="mobile-link">Details</a></li>
+    <li><a href="#itinerary" class="mobile-link">Itinerary</a></li>
+    <li><a href="#gallery" class="mobile-link">Gallery</a></li>
+    <li><a href="#registry" class="mobile-link">Registry</a></li>
+    <li><a href="#faq" class="mobile-link">FAQ</a></li>
   </ul>
 </nav>
 
@@ -219,6 +235,7 @@
 <div id="cat-rain-container"></div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/mmenu-light@3.0.5/dist/mmenu-light.js"></script>
 
 <script>
   // Nav scroll effect
@@ -226,6 +243,43 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
+
+  // Mobile off-canvas menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (navToggle && mobileMenu && window.MmenuLight) {
+    const menu = new MmenuLight(mobileMenu, '(max-width: 700px)');
+    menu.navigation({ title: 'Menu' });
+    const drawer = menu.offcanvas({ position: 'right' });
+
+    navToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      drawer.open();
+      navToggle.setAttribute('aria-expanded', 'true');
+    });
+
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('.mm-spn .mobile-link');
+      if (!link) return;
+
+      const href = link.getAttribute('href') || '';
+      drawer.close();
+      navToggle.setAttribute('aria-expanded', 'false');
+
+      if (href.startsWith('#')) {
+        event.preventDefault();
+        setTimeout(() => {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.location.hash = href;
+          }
+        }, 260);
+      }
+    });
+  }
 
   // Hero parallax & load
   const hero = document.getElementById('hero');

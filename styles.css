@@ -201,6 +201,53 @@ nav.scrolled .nav-links a {
 .nav-links a:hover {
   color: var(--accent);
 }
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.95);
+  transition: background 0.3s;
+}
+nav.scrolled .nav-toggle span {
+  background: var(--dark);
+}
+body.itinerary-page .nav-toggle span {
+  background: var(--dark);
+}
+
+.mm-ocd__content,
+.mm-spn {
+  background: var(--warm-white);
+  color: var(--dark);
+}
+
+.mm-spn .mobile-nav-links {
+  list-style: none;
+}
+
+.mm-spn a {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--text);
+}
+
+.mm-spn a:hover {
+  color: var(--accent);
+}
 
 /* ── HERO ── */
 #hero {
@@ -782,8 +829,11 @@ footer {
   nav {
     padding: 16px 20px;
   }
-  .nav-links {
-    gap: 16px;
+  #mainNav .nav-links {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
   }
   .itinerary-cards {
     grid-template-columns: 1fr;
