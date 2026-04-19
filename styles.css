@@ -181,7 +181,7 @@ nav.scrolled .nav-logo {
   color: var(--dark);
 }
 .nav-links {
-  display: flex;
+  display: none;
   gap: 32px;
   list-style: none;
 }
@@ -202,7 +202,7 @@ nav.scrolled .nav-links a {
   color: var(--accent);
 }
 .nav-toggle {
-  display: none;
+  display: flex;
   width: 42px;
   height: 42px;
   border: 0;
@@ -227,33 +227,140 @@ body.itinerary-page .nav-toggle span {
   background: var(--dark);
 }
 
-.mm-ocd__content,
-.mm-spn {
+#mobileMenu {
+  position: fixed;
+  inset: 0;
+  left: auto;
+  width: 100%;
+  max-width: 100%;
+  transform: translateX(100%);
+  transition: none;
+  z-index: 300;
   background: var(--warm-white);
   color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 52px;
+  overflow-y: auto;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.mm-spn .mobile-nav-links {
-  list-style: none;
+.menu-ready #mobileMenu {
+  transition: transform 0.28s ease;
 }
 
-.mm-spn a {
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.74rem;
-  color: var(--text);
+.menu-open #mobileMenu {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
-.mm-spn a:hover {
+.menu-close {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
   color: var(--accent);
+  transition: color 0.2s;
 }
 
-.mm-ocd,
-.mm-ocd__content,
-.mm-ocd__backdrop {
-  transition-duration: 0ms !important;
-  animation-duration: 0ms !important;
+.menu-close:hover {
+  color: var(--brown);
+}
+
+.menu-header {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 6vw, 3.2rem);
+  font-weight: 300;
+  color: var(--accent);
+  margin-bottom: 40px;
+  line-height: 1.15;
+  text-align: center;
+  width: 100%;
+}
+
+.menu-header span {
+  font-style: italic;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: grid;
+  gap: 0;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.mobile-nav-links li {
+  border-bottom: 1px solid var(--sand);
+}
+
+.mobile-nav-links li:first-child {
+  border-top: 1px solid var(--sand);
+}
+
+.mobile-nav-links a {
+  display: block;
+  padding: 22px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-nav-links a:hover {
+  color: var(--brown);
+}
+
+.menu-footer {
+  padding-top: 36px;
+  text-align: center;
+  width: 100%;
+}
+
+.menu-cta {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 16px 36px;
+  transition: background 0.25s, color 0.25s;
+}
+
+.menu-cta:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28,22,18,0.35);
+  z-index: 250;
+}
+
+.menu-backdrop[hidden] {
+  display: none;
 }
 
 /* ── HERO ── */
@@ -835,12 +942,6 @@ footer {
 @media (max-width: 700px) {
   nav {
     padding: 16px 20px;
-  }
-  #mainNav .nav-links {
-    display: none;
-  }
-  .nav-toggle {
-    display: flex;
   }
   .itinerary-cards {
     grid-template-columns: 1fr;
