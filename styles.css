@@ -177,8 +177,16 @@ nav.scrolled {
   text-transform: uppercase;
   transition: color 0.4s;
 }
+.nav-logo img {
+  filter: brightness(0) invert(1);
+  transition: filter 0.4s;
+}
 nav.scrolled .nav-logo {
   color: var(--dark);
+}
+nav.scrolled .nav-logo img,
+body.itinerary-page .nav-logo img {
+  filter: none;
 }
 .nav-links {
   display: none;
@@ -936,7 +944,7 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   nav {
-    padding: 16px 20px;
+    padding: 0px 20px;
   }
   .itinerary-cards {
     grid-template-columns: 1fr;
