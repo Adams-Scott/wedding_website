@@ -946,6 +946,19 @@ footer {
   nav {
     padding: 0px 20px;
   }
+  .venue-photo {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+  .gallery-carousel {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
   .itinerary-cards {
     grid-template-columns: 1fr;
     max-width: 360px;
