@@ -991,7 +991,7 @@ footer {
 
 @media (max-width: 860px) {
   body.itinerary-page {
-    padding: 24px;
+    padding: 90px 24px 24px;
   }
   .itinerary-body {
     padding: 0 20px;
