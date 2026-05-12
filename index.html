@@ -241,7 +241,13 @@
           <span>What should I wear?</span>
           <span class="faq-chevron">▾</span>
         </div>
-        <div class="faq-a">The dress code is cocktail attire. Think garden party elegance — flowy dresses, linen suits, and pastel tones are always welcome. Please keep in mind the ceremony is outdoors, so comfortable footwear is a must. We love a heel but a wedge or flat is always a great idea on grass!</div>
+        <div class="faq-a">
+          Polished and put-together.<br>
+          Dresses, skirts, bluses, dress pants, or nice jumpsuits are all great choices!<br>
+          Suits or seperates, dress pants with button-ups are perfect, with blazers or ties as optional (but encouraged!) touch.<br>
+          Please avoid wearing jeans, sneakers, or t-shirts.<br>
+          <a href="#" id="attireExamplesLink" class="faq-attire-link">Examples</a>
+        </div>
       </div>
 
     </div>
@@ -256,6 +262,11 @@
 </footer>
 
 <div id="cat-rain-container"></div>
+
+<div id="attireLightbox" class="lightbox" hidden>
+  <button type="button" class="lightbox-close" id="attireLightboxClose" aria-label="Close attire examples">&times;</button>
+  <img src="pictures/attire.png" alt="Suggested wedding attire examples" class="lightbox-image">
+</div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
@@ -324,6 +335,42 @@
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  // Attire examples lightbox
+  const attireExamplesLink = document.getElementById('attireExamplesLink');
+  const attireLightbox = document.getElementById('attireLightbox');
+  const attireLightboxClose = document.getElementById('attireLightboxClose');
+
+  if (attireExamplesLink && attireLightbox && attireLightboxClose) {
+    const openAttireLightbox = () => {
+      attireLightbox.hidden = false;
+      document.body.classList.add('lightbox-open');
+    };
+
+    const closeAttireLightbox = () => {
+      attireLightbox.hidden = true;
+      document.body.classList.remove('lightbox-open');
+    };
+
+    attireExamplesLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      openAttireLightbox();
+    });
+
+    attireLightboxClose.addEventListener('click', closeAttireLightbox);
+
+    attireLightbox.addEventListener('click', (event) => {
+      if (event.target === attireLightbox) {
+        closeAttireLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !attireLightbox.hidden) {
+        closeAttireLightbox();
+      }
+    });
+  }
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
