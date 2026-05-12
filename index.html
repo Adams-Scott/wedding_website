@@ -258,7 +258,7 @@
 <footer>
   <div class="footer-names">Scott &amp; Kelly</div>
   <p class="footer-date">September 6, 2026</p>
-  <button id="cat-button" type="button">Cats</button>
+  <button id="cat-button" type="button">Paw-ty</button>
 </footer>
 
 <div id="cat-rain-container"></div>
@@ -445,11 +445,11 @@
     if (isCatRainActive) {
       clearInterval(catIntervalId);
       catIntervalId = null;
-      catButton.textContent = 'Cats';
+      catButton.textContent = 'Paw-ty again!';
       isCatRainActive = false;
     } else {
       catIntervalId = setInterval(createCat, 200);
-      catButton.textContent = 'No Cats';
+      catButton.textContent = 'End Paw-ty';
       isCatRainActive = true;
     }
   }
