@@ -41,6 +41,36 @@
     margin-bottom: 40px;
   }
 
+  .category-picker {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    margin-top: 12px;
+    background: var(--rose-soft);
+    border-radius: 999px;
+  }
+
+  .category-picker button {
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 16px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font: 600 0.9rem 'Inter', sans-serif;
+  }
+
+  .category-picker button[aria-selected="true"] {
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: 0 1px 4px rgb(59 36 48 / 12%);
+  }
+
+  .category-picker button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
   .kicker {
     font-family: 'Fraunces', serif;
     font-style: italic;
@@ -107,34 +137,85 @@
     <header>
       <p class="kicker">A game before "I do"</p>
       <h1>Scattergories</h1>
+      <div class="category-picker" role="tablist" aria-label="Game category">
+        <button type="button" role="tab" aria-selected="true" data-category="bachelorette">Bachelorette</button>
+        <button type="button" role="tab" aria-selected="false" data-category="trueCrime">True Crime</button>
+        <button type="button" role="tab" aria-selected="false" data-category="nostalgia">Nostalgia</button>
+      </div>
     </header>
 
     <div class="prompts" id="prompts"></div>
   </div>
 
 <script>
-  const categories = [
-    "A registry gift that the bride would like",
-    "Wedding cocktail order",
-    "Advice for the new bride",
-    "A song that will get everyone to dance at the wedding",
-    "Honeymoon destination",
-    "Husband material",
-    "Ex material",
-    "A nickname for the bride",
-    "A name of a cat that the bride has petted",
-    "A bridesmaid duty",
-    "A phrase that will be overused tonight",
-    "A drink order from Blackrock that the future bride would like tomorrow"
-  ];
+  const categoryPrompts = {
+    bachelorette: [
+      "A registry gift that the bride would like",
+      "Wedding cocktail order",
+      "Advice for the new bride",
+      "A song that will get everyone to dance at the wedding",
+      "Honeymoon destination",
+      "Husband material",
+      "Ex material",
+      "A nickname for the bride",
+      "A name of a cat that the bride has petted",
+      "A bridesmaid duty",
+      "A phrase that will be overused tonight",
+      "A drink order from Blackrock that the future bride would like tomorrow"
+    ],
+    trueCrime: [
+      "A serial killer name",
+      "How the bride would kill her husband",
+      "A true crime podcast title",
+      "The bride's alibi for tonight",
+      "A weapon found at the \"scene of the crime\"",
+      "A true crime documentary you've binged",
+      "A red flag that's actually a crime scene clue",
+      "Last words of a true crime victim (make it dramatic)",
+      "A nickname the press would give the bride if she went rogue",
+      "A place to hide a body",
+      "The bride's most suspicious habit",
+      "Evidence that would convict the bride"
+    ],
+    nostalgia: [
+      "A boy band or girl group",
+      "A throwback trend that needs to stay dead",
+      "A song everyone knew every word to",
+      "A 90s/2000s TV show crush",
+      "A slang word that's aged terribly",
+      "A reality TV show or band from childhood",
+      "A fashion trend making an ironic comeback",
+      "A movie that defined a middle school sleepover",
+      "A poster that the bride would have had as a teen",
+      "A Y2K accessory (think low-rise jeans, butterfly clips)",
+      "A cringey AIM/MySpace status line",
+      "A one-hit wonder song"
+    ]
+  };
   const promptsEl = document.getElementById('prompts');
-  categories.forEach((text, i) => {
-    const n = i + 1;
-    const div = document.createElement('div');
-    div.className = 'prompt';
-    div.innerHTML = `<span class="num">${n}</span><p>${text}</p>`;
-    promptsEl.appendChild(div);
+  const categoryButtons = document.querySelectorAll('[data-category]');
+
+  function renderPrompts(category) {
+    promptsEl.replaceChildren();
+    categoryPrompts[category].forEach((text, i) => {
+      const div = document.createElement('div');
+      div.className = 'prompt';
+      div.innerHTML = `<span class="num">${i + 1}</span><p>${text}</p>`;
+      promptsEl.appendChild(div);
+    });
+  }
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.category;
+      categoryButtons.forEach((categoryButton) => {
+        categoryButton.setAttribute('aria-selected', categoryButton === button);
+      });
+      renderPrompts(category);
+    });
   });
+
+  renderPrompts('bachelorette');
 </script>
 </body>
 </html>
