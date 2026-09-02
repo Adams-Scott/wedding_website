@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scattergories — Bachelorette Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen: #FBEEE7;
+    --card: #FFFBF7;
+    --ink: #3B2430;
+    --ink-soft: #7A5C68;
+    --gold: #B8873A;
+    --rose: #C13C63;
+    --rose-soft: #F4D9E1;
+    --line: #EAD3D9;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--linen);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .kicker {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--rose);
+    margin: 0 0 4px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.02;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Prompt list */
+  .prompts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 620px) {
+    .prompts { grid-template-columns: 1fr; }
+  }
+
+  .prompt {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .prompt .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--rose);
+    min-width: 22px;
+  }
+
+  .prompt p {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 1.02rem;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 32px 16px 56px; }
+    header { margin-bottom: 28px; }
+    .prompt { padding: 16px; gap: 12px; }
+    .prompt p { font-size: 0.98rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="kicker">A game before "I do"</p>
+      <h1>Scattergories</h1>
+    </header>
+
+    <div class="prompts" id="prompts"></div>
+  </div>
+
+<script>
+  const categories = [
+    "A registry gift that the bride would like",
+    "Wedding cocktail order",
+    "Advice for the new bride",
+    "A song that will get everyone to dance at the wedding",
+    "Honeymoon destination",
+    "Husband material",
+    "Ex material",
+    "A nickname for the bride",
+    "A name of a cat that the bride has petted",
+    "A bridesmaid duty",
+    "A phrase that will be overused tonight",
+    "A drink order from Blackrock that the future bride would like tomorrow"
+  ];
+  const promptsEl = document.getElementById('prompts');
+  categories.forEach((text, i) => {
+    const n = i + 1;
+    const div = document.createElement('div');
+    div.className = 'prompt';
+    div.innerHTML = `<span class="num">${n}</span><p>${text}</p>`;
+    promptsEl.appendChild(div);
+  });
+</script>
+</body>
+</html>
