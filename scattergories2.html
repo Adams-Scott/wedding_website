@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FEF7FF">
+<title>Scattergories Lists</title>
+<style>
+:root{--pri:#6750A4;--onpri:#fff;--bg:#FEF7FF;--on:#1D1B20;--sc:#F3EDF7;--sch:#ECE6F0;--out:#79747E;--pc:#EADDFF;--onpc:#21005D;--onv:#49454F;--sh:0 1px 3px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.12);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pri:#D0BCFF;--onpri:#381E72;--bg:#141218;--on:#E6E0E9;--sc:#211F26;--sch:#2B2930;--out:#938F99;--pc:#4F378B;--onpc:#EADDFF;--onv:#CAC4D0;--sh:0 1px 3px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{--pri:#D0BCFF;--onpri:#381E72;--bg:#141218;--on:#E6E0E9;--sc:#211F26;--sch:#2B2930;--out:#938F99;--pc:#4F378B;--onpc:#EADDFF;--onv:#CAC4D0;--sh:0 1px 3px rgba(0,0,0,.6);color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--on);font:400 16px/1.5 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;transition:background .2s,color .2s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sc);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sc);padding:8px 8px 16px 16px;box-shadow:var(--sh)}
+.bar{display:flex;align-items:center;gap:4px;min-height:48px}
+h1{flex:1;margin:0;font-size:22px;font-weight:500;line-height:28px}
+.ib{width:48px;height:48px;border:0;border-radius:50%;background:none;color:var(--onv);display:grid;place-items:center;cursor:pointer;position:relative}
+.ib:hover{background:var(--sch)}.ib:focus-visible{outline:2px solid var(--pri)}
+.ib.on{color:var(--pri)}
+.ib svg{width:24px;height:24px;fill:currentColor}
+.ib .off{display:none}.ib:not(.on) .off{display:block}.ib:not(.on) .onn{display:none}
+.sel{position:relative;margin:8px 8px 0 0}
+.sel label{position:absolute;top:-9px;left:12px;padding:0 4px;background:var(--sc);font-size:12px;color:var(--pri);line-height:16px;z-index:1}
+select{width:100%;height:56px;appearance:none;-webkit-appearance:none;border:1px solid var(--out);border-radius:4px;background:transparent;color:var(--on);font:inherit;padding:0 48px 0 16px;cursor:pointer}
+select:focus{outline:2px solid var(--pri);border-color:var(--pri)}
+select option,select optgroup{background:var(--bg);color:var(--on)}
+.sel svg{position:absolute;right:12px;top:16px;width:24px;height:24px;fill:var(--onv);pointer-events:none}
+main{max-width:560px;margin:0 auto;padding:16px 16px 32px}
+.card{background:var(--sc);border-radius:16px;padding:8px 0;box-shadow:var(--sh)}
+.sub{margin:0;padding:12px 20px 8px;font-size:14px;font-weight:500;color:var(--pri);letter-spacing:.1px}
+ol{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:center;gap:16px;min-height:56px;padding:8px 20px;font-size:17px;font-weight:500;letter-spacing:.3px}
+li+li{border-top:1px solid color-mix(in srgb,var(--out) 30%,transparent)}
+li i{flex:none;width:32px;height:32px;border-radius:50%;background:var(--pc);color:var(--onpc);display:grid;place-items:center;font:500 14px Roboto,system-ui,sans-serif}
+</style>
+</head>
+<body>
+<header>
+<div class="bar">
+<h1>Scattergories</h1>
+<button class="ib" id="wl" aria-label="Keep screen awake" title="Keep screen awake"><svg viewBox="0 0 24 24"><path class="onn" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5a1 1 0 0 0-1 1v1a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1zm0 18a1 1 0 0 0-1 1v1a1 1 0 1 0 2 0v-1a1 1 0 0 0-1-1zM4 11H3a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2zm17 0h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2z"/><path class="off" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" opacity=".45"/></svg></button>
+<button class="ib" id="th" aria-label="Toggle light and dark mode" title="Toggle light/dark"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4A9.4 9.4 0 0 0 12 3z"/></svg></button>
+</div>
+<div class="sel"><label for="s">List</label><select id="s"></select><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+</header>
+<main><div class="card"><p class="sub" id="t"></p><ol id="o"></ol></div></main>
+<script>
+var G=[
+["Lists 1–16",[
+["List 1 · Names & Places","A boy’s name|U.S. cities|Things that are cold|School supplies|Pro sports teams|Insects|Breakfast foods|Furniture|TV shows|Things found in the ocean|Presidents|Product names"],
+["List 2 · Work & Daily Life","Vegetables|States|Things you throw away|Occupations|Appliances|Cartoon characters|Types of drink|Musical groups|Store names|Things at a football game|Trees|Personality traits"],
+["List 3 · Wardrobe to Workshop","Articles of clothing|Desserts|Car parts|Things found on a map|Athletes|4-letter words|Items in a refrigerator|Farm animals|Street names|Things at the beach|Colors|Tools"],
+["List 4 · Body, Birds & Blooms","Sports|Song titles|Parts of the body|Ethnic foods|Things you shout|Birds|A girl’s name|Ways to get from here to there|Items in a kitchen|Villains / monsters|Flowers|Things you replace"],
+["List 5 · Sandwiches & Stars","Sandwiches|Items in a catalog|World leaders / politicians|School subjects|Excuses for being late|Ice cream flavors|Things that jump / bounce|Television stars|Things in a park|Foreign cities|Stones / gems|Musical instruments"],
+["List 6 · Habits & Hobbies","Things that are sticky|Awards / ceremonies|Cars|Spices / herbs|Bad habits|Cosmetics / toiletries|Celebrities|Cooking utensils|Reptiles / amphibians|Parks|Leisure activities|Things you’re allergic to"],
+["List 7 · Capitals & Candy","Fictional characters|Menu items|Magazines|Capitals|Kinds of candy|Items you save up to buy|Footwear|Something you keep hidden|Items in a suitcase|Things with tails|Sports equipment|Crimes"],
+["List 8 · Sky, Sea & Spots","Nicknames|Things in the sky|Pizza toppings|Colleges / universities|Fish|Countries|Things that have spots|Historical figures|Something you’re afraid of|Terms of measurement|Items in this room|Book titles"],
+["List 9 · Restaurants & Rogues","Restaurants|Notorious people|Fruits|Things in a medicine cabinet|Toys|Household chores|Bodies of water|Authors|Halloween costumes|Weapons|Things that are round|Words associated with exercise"],
+["List 10 · Heroes & Gifts","Heroes|Gifts / presents|Terms of endearment|Kinds of dances|Things that are black|Vehicles|Tropical locations|College majors|Dairy products|Things in a souvenir shop|Items in your purse / wallet|World records"],
+["List 11 · Games & Getaways","Baby foods|Famous duos and trios|Things found in a desk|Vacation spots|Diseases|Words associated with money|Items in a vending machine|Movie titles|Games|Things that you wear|Beers|Things at a circus"],
+["List 12 · Hobbies & Companies","Famous females|Medicine / drugs|Things made of metal|Hobbies|People in uniform|Things you plug in|Animals|Languages|Names used in the Bible|Junk food|Things that grow|Companies"],
+["List 13 · Picnics & Weddings","Things at a picnic|Things that are soft|Things in a science fiction movie|Things at the White House|Things that kids play with|Things at a wedding|Hot places|Things in outer space|Found in a college dorm|Things at a diner|Famous singers|Things at an amusement park"],
+["List 14 · Safaris & Holidays","Worn above the waist|Things that are bright|Things that have numbers|Found in a gym / health club|Things on a safari|Ways to say hi and bye|Things from the sixties|Holiday things|Items in an office|Things in pairs or sets|Things on a highway|Things in Las Vegas"],
+["List 15 · Zoos, Hotels & Hikes","Things at a zoo|Things with motors|Things that fly|Found at a salad bar|Words ending in “ly”|Things on a hiking trip|Things in a hotel|Healthy foods|Found in a classroom|Party things|Reasons to skip school / work|Titles people have"],
+["List 16 · Deserts & Mysteries","Things in a desert|Things in a mystery novel|Computer lingo|Loud things|Kinds of soups / stews|Math terms|Underground things|Things in the Wild West|Things in an airport|Words with double letters|Found in New York City|Things in fairy tales"]
+]],
+["Refill #1",[
+["Refill #1 · Animals","From TV, movies and books|Dangerous animals|Animals that swim|Four-legged creatures|Things animals eat|Pets|Animals found in foreign lands|Animal noises|At the zoo|Mascots|Animals that advertise products|Animals that fly"],
+["Refill #1 · Famous People","Movie stars (living)|Movie stars (dead)|Political figures|Sports personalities|Sex symbols|Newscasters / journalists|Singers|Artists|Celebrities you’d like to meet|Children|Stars who appear in both TV and movies|Military leaders"],
+["Refill #1 · The Five Senses","Things that smell bad|Things you can’t see|Things you don’t want to hear|Things that feel soft|Things that taste spicy|Things that smell good|Things that are red|Things you never tasted|Things that are loud|Things you shouldn’t touch|Things you see in a city|Things that feel hot"],
+["Refill #1 · Food & Drink","Produce|Cocktails|Seafood|Low calorie foods|Food found in a deli|Breakfast cereals|Any green food or drink|Soft drinks|Disgusting things to eat or drink|Hors d’oeuvres|Fried foods|On a wine list"],
+["Refill #1 · Kinds of Food","Italian food|Fast food|Kinds of soup|Snacks|Food you eat raw|Food found in a casserole|Food at a carnival or fair|Health food|Canned food|Chinese food|Found in a salad bar|Mexican food"],
+["Refill #1 · People","People you admire|Last names|People who do dangerous jobs|Couples|People who go door-to-door|Nationalities|People who work at night|People’s names used in songs|People you avoid|Someone from your past|Titles people have|People who work alone"],
+["Refill #1 · Places","In Europe|Honeymoon spots|Cold climates|Places you wouldn’t want to live|Islands|In North America|In your hometown|With a high altitude|Not on the planet Earth|In National Geographic magazine|Fictitious places|Warm climates"],
+["Refill #1 · Potpourri","Things found in the water|Gifts for the bride and groom|Tourist attractions|Reasons to call emergency 911|Things you carry|Things from a stationery store|Reasons to quit your job|Things worn from the waist up|Things that are white|Things found in a basement / cellar|Things with stripes|Things you need tickets to see"],
+["Refill #1 · School Days","Math terms|Things you do in study hall|Things found in a locker|Things you study in history|Science terms|After school activities|Reasons to go to the principal’s office|Reasons to be absent|Things in a classroom|Things you study in geography|Things you do in gym class|Found in the cafeteria"],
+["Refill #1 · Sports","Team names|Played inside|Played outside|Books, movies, or TV shows about sports|Sports terms|Female athletes|Sporting events|A football player’s name|A baseball player’s name|Things you scream at officials|Olympic events|Athletes who do commercials"],
+["Refill #1 · Television","Cancelled TV shows|Movies on TV|Children’s TV shows|Comedy shows|Long-running TV series|Shows you don’t like|Things sold in commercials|TV character names|Female stars|Male stars|Things you do while watching TV|Daytime TV shows"],
+["Refill #1 · Words, Words, Words","Words ending in “ly”|Nouns|Action words|Abbreviations|Foreign words|5-letter words|Words that end in “ing”|Words with a double letter|Words said in anger|Adjectives|Words ending in “ed”|3-letter words"]
+]],
+["Lists 19–30",[
+["List 19 · Food & Drink","Produce|Cocktails|Seafood|Low calorie foods|Food found in a deli|Breakfast cereals|Green foods & drinks|Soft drinks|Disgusting things to eat|Appetizers|Fried foods|On the wine list"],
+["List 20 · Words & Wordplay","Kinds of soup|Words ending in “-ly”|Nouns|Action words|Abbreviations|Foreign words|5-letter words|Words that end in “-ing”|Words with double letters|Adjectives|Words ending in “-ed”|3-letter words"],
+["List 21 · The Five Senses","Things that smell bad|Things you can see|Things you don’t want to hear|Things that feel soft|Things that taste spicy|Things that smell good|Things that are red|Things you’ve never tasted|Things that are loud|Things you shouldn’t touch|Things you see in a city|Things that feel hot"],
+["List 22 · Sports","Team names|Sports played inside|Sports played outside|Books/movies/TV about sports|Sports terms|Female athletes|Sporting events|Football player|Baseball player|Things you shout at officials|Olympic events|Athletes in commercials"],
+["List 23 · Foods of the World","Mexican foods|Italian foods|Fast foods|Kinds of soup|Snack foods|Foods you eat raw|Foods found in casseroles|Carnival/fair foods|Health foods|Canned foods|Chinese foods|Things found in a salad bar"],
+["List 24 · Famous Faces","Movie stars (living)|Movie stars (dead)|Political figures|Sports figures|Sex symbols|Newscasters/journalists|Singers|Artists|Celebrities you’d like to meet|Famous children|Stars who appear in both TV & movies|Military leaders"],
+["List 25 · Odds & Ends","Things found in the water|Gifts for the bride & groom|Tourist attractions|Reasons to call 9-1-1|Things you carry|Things from a stationery store|Reasons to quit your job|Things worn from the waist up|Things that are white|Things found in the basement|Things with stripes|Things you need tickets to see"],
+["List 26 · Places Around the Globe","Places in Europe|Honeymoon spots|Cold climates|Places you wouldn’t want to live|Islands|Places in North America|Places in your town|Places with a high altitude|Places not on Earth|Places from National Geographic|Fictitious places|Warm climates"],
+["List 27 · People","People you admire|Last names|Dangerous professions|Couples|People who go door to door|Nationalities|People who work at night|Names from songs|People you avoid|Someone from your past|Titles people can have|People who work alone"],
+["List 28 · Animal Kingdom","Animals from TV/movies/books|Dangerous animals|Animals that swim|Four-legged animals|Things animals eat|Pets|Animals found in foreign lands|Animal noises|Zoo animals|Mascots|Animals in advertising|Animals that fly"],
+["List 29 · Television","Cancelled TV shows|Movies shown on TV|Children’s TV shows|Comedy shows/sitcoms|Long-running TV shows|Shows you don’t like|Things sold on commercials|TV character names|Female TV stars|Male TV stars|Things you do while watching TV|Daytime TV shows"],
+["List 30 · School Days","Math terms|Things you do in study hall|Things found in lockers|Things you study in history|Science terms|After school activities|Reasons to go to the principal’s office|Reasons to be absent|Things in a classroom|Things you study in geography|Things you do in P.E.|Things found in a cafeteria"]
+]]];
+var $=function(i){return document.getElementById(i)},s=$("s"),all=[],R=document.documentElement;
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
+G.forEach(function(g){var og=document.createElement("optgroup");og.label=g[0];g[1].forEach(function(l){var o=document.createElement("option");o.value=all.length;o.textContent=l[0];og.appendChild(o);all.push(l)});s.appendChild(og)});
+function show(i){var l=all[i]||all[0];$("t").textContent=l[0];$("o").innerHTML="";l[1].split("|").forEach(function(x,n){var li=document.createElement("li"),b=document.createElement("i");b.textContent=n+1;li.appendChild(b);li.appendChild(document.createTextNode(x));$("o").appendChild(li)});window.scrollTo(0,0)}
+s.onchange=function(){st("sc-list",s.value);show(s.value)};
+var sv=parseInt(st("sc-list"),10);if(!(sv>=0&&sv<all.length))sv=0;s.value=sv;show(sv);
+var mq=window.matchMedia("(prefers-color-scheme: dark)");
+function theme(t){R.setAttribute("data-theme",t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="dark"?"#211F26":"#F3EDF7"}
+theme(st("sc-theme")||(mq.matches?"dark":"light"));
+mq.addEventListener&&mq.addEventListener("change",function(e){if(!st("sc-theme"))theme(e.matches?"dark":"light")});
+$("th").onclick=function(){var t=R.getAttribute("data-theme")==="dark"?"light":"dark";st("sc-theme",t);theme(t)};
+var lock=null,want=true,wl=$("wl");
+function upd(){wl.classList.toggle("on",!!lock);wl.title=lock?"Screen will stay awake (tap to turn off)":"Screen may sleep (tap to keep awake)"}
+async function acq(){if(!want||lock||!navigator.wakeLock||document.visibilityState!=="visible")return;try{lock=await navigator.wakeLock.request("screen");lock.addEventListener("release",function(){lock=null;upd()})}catch(e){lock=null}upd()}
+wl.onclick=function(){want=!want;if(want)acq();else if(lock){lock.release();lock=null;upd()}};
+document.addEventListener("visibilitychange",acq);
+document.addEventListener("pointerdown",acq);
+acq();upd();
+</script>
+</body>
+</html>
